@@ -1,0 +1,17 @@
+<h1>
+  Hello, Angular starts here!
+  HTML component page.  
+</h1>
+
+<p>{{title}}</p>
+<h1>{{msg}}</h1>
+<!-- *ngFor is used iteration,it's an structural directive-->
+<div *ngFor="let user of users; let i=index"> 
+  <h2>Index : {{i}}</h2>          
+  <h1>Name is :{{user.name}}
+    <br>Age is :{{user.age}}
+</h1>       
+</div>       
+
+<div *ngIf="users[1].age===21">Yes age is 21</div>
+<div *ngIf="users[1].age!==21">No age is not 21</div>  <!-- *ngIf is also an Structural directive-->

@@ -8,10 +8,85 @@
 <!-- *ngFor is used iteration,it's an structural directive-->
 <div *ngFor="let user of users; let i=index"> 
   <h2>Index : {{i}}</h2>          
-  <h1>Name is :{{user.name}}
+  <h3>Name is :{{user.name}}
     <br>Age is :{{user.age}}
-</h1>       
+    <br>Id is :{{user.id}}
+</h3>      
 </div>       
 
-<div *ngIf="users[1].age===21">Yes age is 21</div>
-<div *ngIf="users[1].age!==21">No age is not 21</div>  <!-- *ngIf is also an Structural directive-->
+<div *ngIf="users[1].age===21">Yes age is 21.</div>
+<div *ngIf="users[1].age!==21">No age is not 21.</div>  <!-- *ngIf is also an Structural directive-->
+
+<div [textContent]="users[0].name">                     <!--Property binding-->
+</div>
+
+<a [href]="LinkSrc" target="_blank">
+  Click to visit facebook.
+</a>
+
+<div [hidden] ="arrayEven()">         
+  Array is not even!;
+</div>
+
+<a href="#" (click)="increment()">
+  increment counter!.                                   <!--Event binding, event comes under()-->
+</a>
+<h1>Incremented counter :{{counter}}</h1>
+
+<input (keyup)="inputValue($event)" type="text">
+<h3>Text value:{{textValue}}</h3>
+
+<h1>Pipes Ex:</h1>
+Converted in uppercase={{"hii"|uppercase}}              <!--Pipes example-->
+<br>Currency to Dollar:{{"101.5"|currency:'USD'}}       
+
+<h3>Length of message:{{title|length}}
+</h3>                                                   <!--User defined Pipe-->
+
+<h3>Required Substring1 :{{"Harsh"|substring:1}}</h3>
+<h3>Required Substring2 :{{"Harsh_Shrivastava"|substring:1:9}}</h3>
+
+<h2>Sorted list of users:</h2>
+<div *ngFor="let user of users|sorting">
+  Name = {{user.name}} id={{user.id}}
+</div>
+
+<br><form #data="ngForm"
+(ngSubmit)="addUser(data.value)">
+
+  <div>
+    <label>Name</label>
+      <input type="text" ngModel name="username">
+  </div>
+
+  <div>
+    <label>Id</label>
+    <input type="number" ngModel name="id">
+  </div>
+
+  <div>
+    <label>Age</label>
+    <input type="number" ngModel name="age">
+  </div>
+
+  <input type="submit" value="submit">
+</form>
+
+<br><h3>User details in formatted order.</h3>
+<table border="1">
+  <tr>
+    <th>Id</th>
+    <th>Name</th>
+  </tr>
+
+ <tr *ngFor="let user of users|sorting">
+    <td>{{user.id}}</td>
+    <td>{{user.name}}</td>                               <!--formatting is done-->
+    <td> 
+      <a href="#" (click)="removeUser(user.id)">Click to remove user.</a>
+    </td>
+  </tr>
+</table>
+
+<input type="text" [(ngModel)]="username" required>
+<br>Entered name is: {{username}}                        <!--two way binding-->
